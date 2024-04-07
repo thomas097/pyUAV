@@ -1,0 +1,7 @@
+*.blend
+*.blend1
+*.obj
+*.png
+*.mtl
+*.pyc
+.old/*
