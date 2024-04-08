@@ -2,8 +2,7 @@ import os
 import trimesh
 import pygfx as gfx
 import imageio.v3 as iio
-from datatypes import *
-
+from pyuav.graphics.datatypes import *
 
 
 class Material(GfxObject):
@@ -78,3 +77,15 @@ class Mesh(GfxObject):
             self._instance.world.rotation = rotation
         else:
             self._instance.local.rotation = rotation
+
+    def get_position(self, mode: str = 'local') -> Vector3f:
+        if mode == 'world':
+            return self._instance.world.position
+        else:
+            return self._instance.local.position
+
+    def get_rotation(self, mode: str = 'local') -> Vector3f:
+        if mode == 'world':
+            return self._instance.world.rotation
+        else:
+            return self._instance.local.rotation

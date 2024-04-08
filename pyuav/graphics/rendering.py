@@ -1,6 +1,6 @@
 import numpy as np
 import pygfx as gfx
-from datatypes import *
+from pyuav.graphics.datatypes import *
 from wgpu.gui.offscreen import WgpuCanvas
 
 
@@ -29,7 +29,7 @@ class PerspectiveCamera(GfxObject):
             self, 
             position: Vector3f = (0, 0, 0),
             rotation: Quaternion = (0, 0, 0, 1),
-            fov: float = 45.0,
+            fov: float = 55.0,
             parent: GfxObject = None
             ) -> None:
         
@@ -61,8 +61,19 @@ class PerspectiveCamera(GfxObject):
             self._instance.world.rotation = rotation
         else:
             self._instance.local.rotation = rotation
-    
 
+    def get_position(self, mode: str = 'local') -> Vector3f:
+        if mode == 'world':
+            return self._instance.world.position
+        else:
+            return self._instance.local.position
+
+    def get_rotation(self, mode: str = 'local') -> Vector3f:
+        if mode == 'world':
+            return self._instance.world.rotation
+        else:
+            return self._instance.local.rotation
+    
 
 class Renderer:
     """Renderer responsible for rendering game frames

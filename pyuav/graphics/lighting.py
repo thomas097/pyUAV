@@ -1,5 +1,5 @@
 import pygfx as gfx
-from datatypes import *
+from pyuav.graphics.datatypes import *
 
 
 class DirectionalLight(GfxObject):

@@ -1,8 +1,10 @@
 from typing import Iterable
 import pygfx as gfx
 
+
 Vector3f = Iterable[float]
 Quaternion = Iterable[float]
+
 
 class GfxObject:
     """Base class from which all wrapper classes of PyGFX internal objects must inherit
