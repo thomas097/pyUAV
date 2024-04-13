@@ -1,7 +1,0 @@
-g = 9.81                  # Gravitational constant
-m = 0.5                   # Mass (in kg)
-L = 0.25                  # Distance from center of mass of drone body to each of its propellors
-k = 3e-6                  # Thrust coefficient
-b = 1e-7                  # Drag coefficient
-I = [5e-3, 5e-3, 10e-3]   # Diagonal of inertia matrix
-kd = 0.25                 # Global drag coefficient
