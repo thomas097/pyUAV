@@ -24,7 +24,8 @@ class QuadcopterPhysicsClient:
             start_pos=np.array(positions, dtype=np.float32),
             start_orn=np.array([la.quat_to_euler(r) for r in rotations], dtype=np.float32),
             drone_type='quadx',
-            render=False
+            render=False,
+            drone_options=dict(drone_model='primitive_drone')
         ) 
         self._base.set_mode([7] * num_drones) # == (x, y, yaw, z)
 
@@ -67,7 +68,7 @@ if __name__ == '__main__':
     )
 
     # Target location to fly drone to
-    target = np.array([[5, 0, 3]], dtype=np.float32)
+    target = np.array([[1, 0, 0.5]], dtype=np.float32)
 
     while True:
         position, rotation = qc.control(targets=target, headings=[0])

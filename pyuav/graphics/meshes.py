@@ -1,6 +1,8 @@
 import os
 import trimesh
 import pygfx as gfx
+import numpy as np
+import pylinalg as la
 import imageio.v3 as iio
 from pyuav.graphics.datatypes import *
 
@@ -62,6 +64,7 @@ class Mesh(GfxObject):
         # Set initial pose
         self.set_position(position, mode='local')
         self.set_rotation(rotation, mode='local')
+        print(f'Mesh.__init__() :: loaded {file_path}')
 
     def parent_to(self, mesh: GfxObject) -> None:
         mesh.get_instance().add(self._instance, keep_world_matrix=False)
@@ -77,6 +80,13 @@ class Mesh(GfxObject):
             self._instance.world.rotation = rotation
         else:
             self._instance.local.rotation = rotation
+
+    def rotate_y(self, angle: float, mode: str = 'local') -> None:
+        qrot = np.array([0, np.sin(angle / 2), 0, np.cos(angle / 2)])
+        if mode == 'world':
+            self._instance.world.rotation = la.quat_mul(qrot, self._instance.world.rotation)
+        else:
+            self._instance.local.rotation = la.quat_mul(qrot, self._instance.local.rotation)
 
     def get_position(self, mode: str = 'local') -> Vector3f:
         if mode == 'world':
