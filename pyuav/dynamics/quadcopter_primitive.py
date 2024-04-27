@@ -47,6 +47,9 @@ class QuadcopterPhysicsClient:
     def control(self, index: int, target: np.ndarray, heading: Iterable[float], dt: float = 0.05) -> None:
         assert 0 <= index < self._num_drones
 
+        # Disturb target
+        target = np.array(target, dtype=np.float32) + np.random.normal(loc=0.0, scale=0.1, size=target.shape)
+
         ####################
         #     Rotation
         ####################
@@ -59,12 +62,12 @@ class QuadcopterPhysicsClient:
         if upwards:
             approach_rotation = self._basis_to_quaternion(
                 forw=direction,
-                upv=self._normalize(1.5 * direction + np.array([0, 1, 0], dtype=np.float32))
+                upv=self._normalize(1.3 * direction + np.array([0, 1, 0], dtype=np.float32))
             )
         else:
             approach_rotation = self._basis_to_quaternion(
                 forw=direction,
-                upv=self._normalize(1.5 * -direction + np.array([0, 1, 0], dtype=np.float32))
+                upv=self._normalize(1.3 * -direction + np.array([0, 1, 0], dtype=np.float32))
             )
 
         # Calculate desired orientation when target is reached (correct heading)
